@@ -1467,6 +1467,16 @@ chat_kick(msg.chat_id_,mem_id[i].id_)
 end
 end
 end
+if text then
+local Feuon_Msg = database:get(bot_id.."Add:Filter:Rp2"..text..result.chat_id_)   
+if Feuon_Msg then    
+Reply_Status(result,result.sender_user_id_,"reply","📬┇"..Feuon_Msg)  
+DeleteMessage(result.chat_id_, {[0] = data.message_id_})     
+return false
+end
+end
+end
+end,nil)
 --------------------------------------------------------------------------------------------------------------
 if msg.content_.ID == "MessageChatJoinByLink" and not Special(msg) then 
 if database:get(bot_id.."lock:Join"..msg.chat_id_) == 'kick' then
@@ -6630,53 +6640,45 @@ database:del(bot_id.."filtersteckr"..msg.chat_id_)
 send(msg.chat_id_, msg.id_,'??| تم مسح قائمه منع الملصقات')  
 end
 if text == "مسح قائمه المنع" and Mod(msg) then   
-local list = database:smembers(bot_id.."List:Filter"..msg.chat_id_)  
+local list = database:smembers(bot_id.."Feuon:List:Filter"..msg.chat_id_)  
 for k,v in pairs(list) do  
 database:del(bot_id.."Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
 database:del(bot_id.."Add:Filter:Rp2"..v..msg.chat_id_)  
 database:srem(bot_id.."List:Filter"..msg.chat_id_,v)  
 end  
-send(msg.chat_id_, msg.id_,"🗑┋ تم مسح قائمه المنع")  
+send(msg.chat_id_, msg.id_,"☑┇تم مسح قائمه المنع")  
 end
+
 if text == "قائمه المنع" and Mod(msg) then   
-local list = database:smembers(bot_id.."List:Filter"..msg.chat_id_)  
-t = "\n📃┋ قائمة المنع \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n"
+local list = database:smembers(bot_id.."Feuon:List:Filter"..msg.chat_id_)  
+t = "\n⛔┇قائمة المنع \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
 for k,v in pairs(list) do  
-local simo_Msg = database:get(bot_id.."Add:Filter:Rp2"..v..msg.chat_id_)   
-t = t..''..k..'- '..v..' » {'..simo_Msg..'}\n'    
+local Feuon_Msg = database:get(bot_id.."Feuon:Add:Filter:Rp2"..v..msg.chat_id_)   
+t = t..""..k.."- "..v.." » {"..Simo_Msg.."}\n"    
 end  
 if #list == 0 then  
-t = "✖┋ لا يوجد كلمات ممنوعه"  
+t = "📬┇لا يوجد كلمات ممنوعه"  
 end  
 send(msg.chat_id_, msg.id_,t)  
 end  
-if text and text == 'منع' and msg.reply_to_message_id_ == 0 and Mod(msg) then       
-if AddChannel(msg.sender_user_id_) == false then
-local textchuser = database:get(bot_id..'text:ch:user')
-if textchuser then
-send(msg.chat_id_, msg.id_,'['..textchuser..']')
-else
-send(msg.chat_id_, msg.id_,'🔅┋عذراً عليك الاشتراك في القناة\n📌┋اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
-end
-return false
-end
-send(msg.chat_id_, msg.id_,'📨┋ ارسل الكلمه لمنعها')  
+if text and text == "منع" and msg.reply_to_message_id_ == 0 and Mod(msg) then       
+send(msg.chat_id_, msg.id_,"📛┇ارسل الكلمه لمنعها")  
 database:set(bot_id.."Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_,"rep")  
 return false  
 end    
 if text then   
-local tsssst = database:get(bot_id.."Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
-if tsssst == 'rep' then   
-send(msg.chat_id_, msg.id_,"📄┋ ارسل التحذير عند ارسال الكلمه")  
+local tsssst = database:get(bot_id.."Feuon:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+if tsssst == "rep" then   
+send(msg.chat_id_, msg.id_,"📫┇ارسل التحذير عند ارسال الكلمه")  
 database:set(bot_id.."Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_,"repp")  
 database:set(bot_id.."filtr1:add:reply2"..msg.sender_user_id_..msg.chat_id_, text)  
 database:sadd(bot_id.."List:Filter"..msg.chat_id_,text)  
 return false  end  
 end
 if text then  
-local test = database:get(bot_id.."Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
-if test == 'repp' then  
-send(msg.chat_id_, msg.id_,'📛┋تم منع الكلمه مع التحذير')  
+local test = database:get(bot_id.."Feuon:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+if test == "repp" then  
+send(msg.chat_id_, msg.id_,"🔖┇تم منع الكلمه مع التحذير")  
 database:del(bot_id.."Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
 local test = database:get(bot_id.."filtr1:add:reply2"..msg.sender_user_id_..msg.chat_id_)  
 if text then   
@@ -6686,23 +6688,14 @@ database:del(bot_id.."filtr1:add:reply2"..msg.sender_user_id_..msg.chat_id_)
 return false  end  
 end
 
-if text == 'الغاء منع' and msg.reply_to_message_id_ == 0 and Mod(msg) then    
-if AddChannel(msg.sender_user_id_) == false then
-local textchuser = database:get(bot_id..'text:ch:user')
-if textchuser then
-send(msg.chat_id_, msg.id_,'['..textchuser..']')
-else
-send(msg.chat_id_, msg.id_,'🔅┋عذراً عليك الاشتراك في القناة\n📌┋اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
-end
-return false
-end
-send(msg.chat_id_, msg.id_,'📄┋ ارسل الكلمه الان')  
+if text == "الغاء منع" and msg.reply_to_message_id_ == 0 and Mod(msg) then    
+send(msg.chat_id_, msg.id_,"🔖┇ارسل الكلمه الان")  
 database:set(bot_id.."Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_,"reppp")  
 return false  end
 if text then 
 local test = database:get(bot_id.."Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
-if test and test == 'reppp' then   
-send(msg.chat_id_, msg.id_,"🌀┋ تم الغاء منعها ")  
+if test and test == "reppp" then   
+send(msg.chat_id_, msg.id_,"📮┇تم الغاء منعها ")  
 database:del(bot_id.."Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
 database:del(bot_id.."Add:Filter:Rp2"..text..msg.chat_id_)  
 database:srem(bot_id.."List:Filter"..msg.chat_id_,text)  
