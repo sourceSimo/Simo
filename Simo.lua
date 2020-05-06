@@ -6661,13 +6661,13 @@ t = "📬┇لا يوجد كلمات ممنوعه"
 end  
 send(msg.chat_id_, msg.id_,t)  
 end  
-if text and text == "منع" and msg.reply_to_message_id_ == 0 and Mod(msg) then       
-send(msg.chat_id_, msg.id_,"📛┇ارسل الكلمه لمنعها")  
+if text and text == 'منع' and msg.reply_to_message_id_ == 0 and Mod(msg) then
+send(msg.chat_id_, msg.id_,'📨| ارسل الكلمهہ‌‏ لمنعها')  
 database:set(bot_id.."Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_,"rep")  
 return false  
 end    
 if text then   
-local tsssst = database:get(bot_id.."Feuon:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+local tsssst = database:get(bot_id.."Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
 if tsssst == "rep" then   
 send(msg.chat_id_, msg.id_,"📫┇ارسل التحذير عند ارسال الكلمه")  
 database:set(bot_id.."Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_,"repp")  
@@ -6676,7 +6676,7 @@ database:sadd(bot_id.."List:Filter"..msg.chat_id_,text)
 return false  end  
 end
 if text then  
-local test = database:get(bot_id.."Feuon:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+local test = database:get(bot_id.."Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
 if test == "repp" then  
 send(msg.chat_id_, msg.id_,"🔖┇تم منع الكلمه مع التحذير")  
 database:del(bot_id.."Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
