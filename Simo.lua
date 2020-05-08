@@ -1468,9 +1468,9 @@ end
 end
 end
 if text then
-local Feuon_Msg = database:get(bot_id.."Add:Filter:Rp2"..text..result.chat_id_)   
-if Feuon_Msg then    
-Reply_Status(result,result.sender_user_id_,"reply","📬┇"..Feuon_Msg)  
+local Simo_Msg = database:get(bot_id.."Add:Filter:Rp2"..text..result.chat_id_)   
+if Simo_Msg then    
+Reply_Status(result,result.sender_user_id_,"reply","📬┇"..Simo_Msg)  
 DeleteMessage(result.chat_id_, {[0] = data.message_id_})     
 return false
 end
@@ -6640,7 +6640,7 @@ database:del(bot_id.."filtersteckr"..msg.chat_id_)
 send(msg.chat_id_, msg.id_,'??| تم مسح قائمه منع الملصقات')  
 end
 if text == "مسح قائمه المنع" and Mod(msg) then   
-local list = database:smembers(bot_id.."Feuon:List:Filter"..msg.chat_id_)  
+local list = database:smembers(bot_id.."List:Filter"..msg.chat_id_)  
 for k,v in pairs(list) do  
 database:del(bot_id.."Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
 database:del(bot_id.."Add:Filter:Rp2"..v..msg.chat_id_)  
@@ -6650,10 +6650,10 @@ send(msg.chat_id_, msg.id_,"☑┇تم مسح قائمه المنع")
 end
 
 if text == "قائمه المنع" and Mod(msg) then   
-local list = database:smembers(bot_id.."Feuon:List:Filter"..msg.chat_id_)  
+local list = database:smembers(bot_id.."List:Filter"..msg.chat_id_)  
 t = "\n⛔┇قائمة المنع \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ \n"
 for k,v in pairs(list) do  
-local Feuon_Msg = database:get(bot_id.."Feuon:Add:Filter:Rp2"..v..msg.chat_id_)   
+local Simo_Msg = database:get(bot_id.."Add:Filter:Rp2"..v..msg.chat_id_)   
 t = t..""..k.."- "..v.." » {"..Simo_Msg.."}\n"    
 end  
 if #list == 0 then  
